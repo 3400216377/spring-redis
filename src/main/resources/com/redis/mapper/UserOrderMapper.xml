@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.redis.mapper.UserOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.redis.entity.UserOrder" >
+    <id column="OrderCode" property="ordercode" jdbcType="VARCHAR" />
+    <result column="OrderCount" property="ordercount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    OrderCode, OrderCount
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_userorder
+    where OrderCode = #{ordercode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_userorder
+    where OrderCode = #{ordercode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.redis.entity.UserOrder" >
+    insert into t_userorder (OrderCode, OrderCount)
+    values (#{ordercode,jdbcType=VARCHAR}, #{ordercount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.redis.entity.UserOrder" >
+    insert into t_userorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ordercode != null" >
+        OrderCode,
+      </if>
+      <if test="ordercount != null" >
+        OrderCount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ordercode != null" >
+        #{ordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="ordercount != null" >
+        #{ordercount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.redis.entity.UserOrder" >
+    update t_userorder
+    <set >
+      <if test="ordercount != null" >
+        OrderCount = #{ordercount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where OrderCode = #{ordercode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.redis.entity.UserOrder" >
+    update t_userorder
+    set OrderCount = #{ordercount,jdbcType=INTEGER}
+    where OrderCode = #{ordercode,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- 数据库驱动包位置 --> 
+	<classPathEntry
+		location="C:/Users/Administrator/.m2/repository/mysql/mysql-connector-java/5.1.37/mysql-connector-java-5.1.37.jar" />
+
+	<context id="my" targetRuntime="MyBatis3">
+	
+		<commentGenerator> 
+			<property name="suppressDate" value="true" />
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		
+ 		<!-- 数据库链接URL、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/test?characterEncoding=UTF8"
+			userId="root" password="root" />
+			
+		<!-- 生成实体类的包名和位置 --> 
+		<javaModelGenerator targetPackage="com.redis.entity"
+			targetProject="spring-redis\src\main\java" />
+			
+		<!-- 生成映射文件的包名和位置 -->
+		<sqlMapGenerator targetPackage="com.redis.mapper"
+			targetProject="spring-redis\src\main\resources" />
+			
+		<!-- 生成DAO的包名和位置 -->
+		<javaClientGenerator targetPackage="com.redis.mapper"
+			targetProject="spring-redis\src\main\java" type="XMLMAPPER" />
+			
+		<!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->  
+		<table tableName="t_userorder" domainObjectName="UserOrder"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" />
+			
+
+	</context>
+
+</generatorConfiguration>
+
+
